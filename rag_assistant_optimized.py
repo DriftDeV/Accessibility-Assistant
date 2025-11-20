@@ -11,6 +11,7 @@ import logging
 from pathlib import Path
 from typing import List, Dict, Tuple, Optional
 from dataclasses import dataclass, asdict
+from collections import OrderedDict
 
 import chromadb
 from chromadb.config import Settings
@@ -27,7 +28,8 @@ class Config:
     Modifica qui i percorsi o i nomi dei modelli.
     """
     json_file: Path = Path("games.json")
-    embedding_model: str = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    # più veloce e leggera (minore latenza nelle query di embedding)
+    embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
     # Usare la versione instruct di Mistral 7B per comportamento orientato alle istruzioni
     llm_model: str = "ibm-granite/granite-3.3-8b-instruct"
     chroma_collection: str = "games_accessibility_v2"
@@ -42,6 +44,12 @@ class Config:
     allow_8bit: bool = True 
     # livello di logging
     log_level: int = logging.INFO
+    # limiti per ridurre la dimensione del prompt (migliora latenza)
+    context_max_chars_per_doc: int = 800
+    context_max_total_chars: int = 2000
+    # semplice LRU cache per risposte e embeddings
+    answer_cache_size: int = 128
+    embed_cache_size: int = 256
 
 
 # --- LOGGING ---
@@ -158,6 +166,8 @@ class ChromaVectorStore:
         self.client: Optional[chromadb.api.models.APIClient] = None
         self.collection = None
         self.embed_model: Optional[SentenceTransformer] = None
+        # simple LRU cache for recent query embeddings to avoid recomputing
+        self._emb_cache: OrderedDict[str, List[float]] = OrderedDict()
 
     def initialize(self) -> None:
         """Inizializza SentenceTransformer e ChromaDB con persistenza"""
@@ -218,11 +228,23 @@ class ChromaVectorStore:
         if self.embed_model is None or self.collection is None:
             raise RuntimeError("Vector store non inizializzato. Chiamare initialize() prima.")
 
-        q_emb = self.embed_model.encode([query], normalize_embeddings=True)
-        if isinstance(q_emb, np.ndarray):
-            q_emb = q_emb.tolist()[0]
+        # Try to use cached embedding for identical recent queries
+        q_emb = None
+        if query in self._emb_cache:
+            q_emb = self._emb_cache.pop(query)
+            # move to end (most-recent)
+            self._emb_cache[query] = q_emb
         else:
-            q_emb = q_emb[0]
+            q_emb_arr = self.embed_model.encode([query], normalize_embeddings=True)
+            if isinstance(q_emb_arr, np.ndarray):
+                q_emb = q_emb_arr.tolist()[0]
+            else:
+                q_emb = q_emb_arr[0]
+            # cache it
+            self._emb_cache[query] = q_emb
+            # maintain cache size
+            if len(self._emb_cache) > self.config.embed_cache_size:
+                self._emb_cache.popitem(last=False)
 
         results = self.collection.query(query_embeddings=[q_emb], n_results=k,
                                         include=["documents", "metadatas", "distances"])
@@ -322,10 +344,12 @@ class ResponseGenerator:
         if self.model is None or self.tokenizer is None:
             raise RuntimeError("LLM non inizializzato. Chiamare initialize() prima.")
 
+        # Build a prompt; the caller should provide a compact context to limit token count.
         prompt = self._build_prompt(context, question)
         tok = self.tokenizer
         model = self.model
 
+        # Tokenize with truncation to avoid extremely long inputs which slow generation
         inputs = tok(prompt, return_tensors="pt", truncation=True, max_length=2048)
         if torch.cuda.is_available():
             inputs = {k: v.cuda() for k, v in inputs.items()}
@@ -336,26 +360,24 @@ class ResponseGenerator:
                 pass
 
         # Parametri conservativi per risposte coerenti
+        # Generation kwargs: keep them deterministic and efficient
         gen_kwargs = dict(
-            **inputs,
             max_new_tokens=self.config.max_response_tokens,
             do_sample=False,
             temperature=0.0,
             top_p=0.95,
             eos_token_id=tok.eos_token_id,
             pad_token_id=tok.pad_token_id,
+            use_cache=True,
         )
 
         # Usare model.generate; gestiamo eventuali errori e fallback
         try:
-            gen_ids = model.generate(input_ids=inputs["input_ids"],
-                                     attention_mask=inputs.get("attention_mask"),
-                                     max_new_tokens=self.config.max_response_tokens,
-                                     do_sample=False,
-                                     temperature=0.0,
-                                     top_p=0.95,
-                                     eos_token_id=tok.eos_token_id,
-                                     pad_token_id=tok.pad_token_id)
+            gen_ids = model.generate(
+                input_ids=inputs["input_ids"],
+                attention_mask=inputs.get("attention_mask"),
+                **gen_kwargs,
+            )
             generated = tok.decode(gen_ids[0], skip_special_tokens=True)
         except Exception as e:
             self.logger.exception("Errore durante generation: %s", e)
@@ -380,6 +402,8 @@ class AccessibilityAssistant:
         self.loader = GameDataLoader(config.json_file, self.logger)
         self.vector_store = ChromaVectorStore(config, self.logger)
         self.response_generator = ResponseGenerator(config, self.logger)
+        # simple LRU cache for answers to reduce repeated generation latency
+        self._answer_cache: OrderedDict = OrderedDict()
 
     def setup(self) -> None:
         """Carica dati, inizializza componenti e indicizza i documenti"""
@@ -397,18 +421,55 @@ class AccessibilityAssistant:
         self.response_generator.initialize()
         self.logger.info("Setup completato. Sistema pronto per le query.")
 
+    def _compact_context(self, docs: List[str]) -> str:
+        """Riduce la dimensione del contesto concatenando versioni tronche dei documenti.
+
+        Questo aiuta a mantenere il prompt più corto e riduce la latenza di tokenizzazione
+        e generazione. Applica prima un limite per documento e poi un limite totale.
+        """
+        per_doc = self.config.context_max_chars_per_doc
+        total_limit = self.config.context_max_total_chars
+
+        trimmed = []
+        for d in docs:
+            if len(d) > per_doc:
+                # manteniamo l'intestazione (prima 200 caratteri) + ultimi per_doc-200 caratteri
+                head = d[:200]
+                tail = d[-(per_doc - 200):]
+                trimmed.append(head + "\n...\n" + tail)
+            else:
+                trimmed.append(d)
+
+        context = "\n\n---\n\n".join(trimmed)
+        if len(context) > total_limit:
+            # tronca preservando l'inizio e la fine del contesto
+            head = context[: total_limit // 2]
+            tail = context[-(total_limit // 2) :]
+            context = head + "\n...\n" + tail
+        return context
+
     def query(self, question: str, k: Optional[int] = None) -> Dict:
         """Esegue ricerca e genera la risposta; ritorna anche le fonti utilizzate"""
         if not question or not question.strip():
             return {"answer": "Inserisci una domanda valida.", "sources": []}
+
+        # LRU cache check
+        key = (question.strip(), k)
+        if key in self._answer_cache:
+            # move to recent
+            val = self._answer_cache.pop(key)
+            self._answer_cache[key] = val
+            self.logger.debug("Answer cache hit for key: %s", key)
+            return val
 
         docs, metas = self.vector_store.search(question, k=k)
         if not docs:
             return {"answer": "Non ho trovato informazioni rilevanti per rispondere alla tua domanda.", "sources": []}
 
         # Creiamo un contesto compatto: concatenazione dei documenti recuperati
-        context = "\n\n---\n\n".join(docs)
-        answer = self.response_generator.generate_response(context, question)
+        # Compatta il contesto per ridurre token length e latenza
+        compact_context = self._compact_context(docs)
+        answer = self.response_generator.generate_response(compact_context, question)
 
         # Normalizziamo le fonti per la UI
         sources = []
@@ -423,7 +484,12 @@ class AccessibilityAssistant:
                 "source_ref": m.get("source_ref")
             })
 
-        return {"answer": answer, "sources": sources}
+        result = {"answer": answer, "sources": sources}
+        # salva in cache LRU
+        self._answer_cache[key] = result
+        if len(self._answer_cache) > self.config.answer_cache_size:
+            self._answer_cache.popitem(last=False)
+        return result
 
     def interactive_mode(self) -> None:
         """Semplice REPL per interrogare l'assistente da terminale"""
