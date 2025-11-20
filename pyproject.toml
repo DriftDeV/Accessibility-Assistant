@@ -1,0 +1,37 @@
+[project]
+name = "accessibility-assistant-rag"
+version = "0.1.0"
+description = "RAG assistant per videogiochi accessibili — risposte in italiano, con Chroma vector store e supporto GPU CUDA"
+readme = "README.md"
+requires-python = ">=3.10"
+
+dependencies = [
+  "python-dotenv>=1.0.0",
+  "langchain>=0.0.320",
+  "chromadb>=0.3.26",
+  "tqdm>=4.0.0",
+  "sentence-transformers>=2.2.2",
+  "transformers>=4.30.0",
+  "huggingface-hub>=0.16.0",
+  "accelerate>=0.20.0",
+  "safetensors>=0.3.0",
+  "torch",
+  "torchvision",
+  "torchaudio",
+  "numpy",
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "accessibility-assistant-rag"
+version = "0.1.0"
+description = "RAG assistant per videogiochi accessibili con supporto CUDA"
+authors = ["Luigi"]
+
+[[tool.uv.index]]
+name = "pytorch-cu124"
+url = "https://download.pytorch.org/whl/cu124"
+explicit = true

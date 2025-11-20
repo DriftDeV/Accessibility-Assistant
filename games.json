@@ -1,0 +1,213 @@
+[
+  {
+    "id": "GAME_001",
+    "name": "The Last of Us Part II (Remastered)",
+    "access_level": 10.0,
+    "is_native": true,
+    "category": "Action-Adventure",
+    "platforms": ["PlayStation 4", "PlayStation 5"],
+    "description": "Considerato il benchmark industriale per l'accessibilità AAA[cite: 18]. Il titolo è stato progettato con l'obiettivo di essere completabile da giocatori con disabilità visive totali senza assistenza esterna. Utilizza un sistema avanzato di 'Motion Matching' per migliorare la leggibilità visiva[cite: 80].",
+    "features": [
+      "Modalità Alto Contrasto (High Contrast Mode) [cite: 82]",
+      "Text-to-Speech (TTS) completo per menu e HUD [cite: 11]",
+      "Navigation Assist (Scansione audio del percorso) [cite: 77]",
+      "Ledge Guard (Protezione cadute) [cite: 173]",
+      "Rallentamento del tempo (Slow Motion) [cite: 77]",
+      "Audio Description per cinematiche [cite: 77]"
+    ],
+    "accessibility_details": {
+      "visual": "L'High Contrast Mode rimuove le texture ambientali rendendo lo sfondo grigio e colorando nemici/alleati in rosso/blu[cite: 82]. Include segnali audio 3D per la navigazione.",
+      "motor": "Rimappatura totale dei controlli, opzioni per suonare la chitarra tramite touchpad, sostituzione di input rapidi con pressioni singole.",
+      "auditory": "Indicatori di direzione per i sottotitoli e cerchi di consapevolezza."
+    },
+    "source_ref": "Documento fornito"
+  },
+  {
+    "id": "GAME_002",
+    "name": "Forza Motorsport (2023)",
+    "access_level": 10.0,
+    "is_native": true,
+    "category": "Racing Simulation",
+    "platforms": ["PC", "Xbox Series X/S"],
+    "description": "Il primo simulatore di guida accessibile ai non vedenti senza l'uso di mod[cite: 177]. Introduce il 'Blind Driving Assist', un sistema che trasforma le informazioni fisiche della vettura e della pista in un linguaggio sonoro complesso[cite: 35].",
+    "features": [
+      "Blind Driving Assists (Guida assistita audio) [cite: 35]",
+      "One Touch Driving (Guida con un tocco) [cite: 77]",
+      "Screen Reader Narrator",
+      "Audio Cues per limiti pista e cambio marcia [cite: 85]",
+      "Filtri avanzati per daltonismo (Tritanopia, ecc.) [cite: 77]"
+    ],
+    "accessibility_details": {
+      "visual": "Il panning stereo e il pitch dell'audio comunicano la posizione in pista e l'avvicinarsi delle curve. Il giocatore 'sente' quando sterzare[cite: 37].",
+      "motor": "L'assistenza alla frenata e all'accelerazione permette di giocare con input minimi, riducendo la necessità di coordinazione fine[cite: 77].",
+      "cognitive": "Possibilità di automatizzare aspetti complessi della simulazione."
+    },
+    "source_ref": "Documento fornito"
+  },
+  {
+    "id": "GAME_013",
+    "name": "Minecraft (Bedrock Edition)",
+    "access_level": 8.0,
+    "is_native": true,
+    "category": "Survival / Sandbox",
+    "platforms": ["PC", "Console", "Mobile"],
+    "description": "Mentre la versione Java richiede mod esterne, la Bedrock Edition include funzionalità native robuste. È citata specificamente per l'uso di indicatori visivi che traducono i suoni ambientali per i non udenti[cite: 65].",
+    "features": [
+      "Audio/Visual Cues (Cerchio visivo radiale per i suoni) [cite: 65]",
+      "Text-to-Speech per la Chat",
+      "Rimappatura controlli (Touch e Controller)",
+      "Modalità 'Peaceful' (Rimuove minacce nemiche)"
+    ],
+    "accessibility_details": {
+      "auditory": "Offre un cerchio visivo radiale che indica la direzione e l'intensità di suoni ambientali come passi o mob[cite: 65].",
+      "cognitive": "La natura sandbox permette di giocare senza pressione temporale o obiettivi imposti.",
+      "visual": "Nativamente limitato per i non vedenti (richiede mod su Java), ma offre UI scaling e TTS per la chat."
+    },
+    "source_ref": "Documento fornito & External Knowledge"
+  },
+  {
+    "id": "GAME_014",
+    "name": "Stardew Valley",
+    "access_level": 6.5,
+    "is_native": false,
+    "category": "Farming Simulator / RPG",
+    "platforms": ["PC", "Console", "Mobile"],
+    "description": "Titolo indie rilassante. Nativamente accessibile per disabilità cognitive (bassa pressione) e motorie lievi, ma richiede mod estensive (es. 'Stardew Access') per essere giocabile da non vedenti.",
+    "features": [
+      "Nessun limite di tempo nei menu (Cognitivo)",
+      "Controlli semplici (compatibile con controller)",
+      "Zoom visuale scalabile",
+      "Supporto Modding per accessibilità avanzata"
+    ],
+    "accessibility_details": {
+      "cognitive": "Eccellente per la gestione dell'ansia; il gioco non penalizza pesantemente il fallimento e permette ritmi personalizzati.",
+      "visual": "Nativamente basso (font piccoli, pixel art complessa). Diventa 9/10 solo su PC con mod screen-reader dedicate.",
+      "motor": "Buono, ma alcune meccaniche di combattimento o pesca possono richiedere riflessi (esistono mod per saltarle)."
+    },
+    "source_ref": "External Knowledge (Contesto Indie)"
+  },
+  {
+    "id": "GAME_004",
+    "name": "Marvel's Spider-Man 2",
+    "access_level": 9.5,
+    "is_native": true,
+    "category": "Action-Adventure",
+    "platforms": ["PlayStation 5", "PC"],
+    "description": "Introduce innovazioni significative per la gestione della velocità di gioco, permettendo di rallentare l'azione globale per facilitare i tempi di reazione[cite: 60].",
+    "features": [
+      "Game Speed Slider (30%, 50%, 70%) [cite: 60]",
+      "QTE Autocomplete [cite: 77]",
+      "High Contrast Shaders [cite: 77]",
+      "Scorciatoie su D-Pad per opzioni accessibilità [cite: 77]"
+    ],
+    "accessibility_details": {
+      "motor": "Il rallentamento del gioco aumenta esponenzialmente la finestra di reazione per il combattimento e le schivate[cite: 61].",
+      "visual": "Shader ad alto contrasto per distinguere chiaramente eroi e nemici.",
+      "cognitive": "Possibilità di saltare i puzzle e semplificare le meccaniche di oscillazione."
+    },
+    "source_ref": "Documento fornito"
+  },
+  {
+    "id": "GAME_005",
+    "name": "Street Fighter 6",
+    "access_level": 9.0,
+    "is_native": true,
+    "category": "Fighting Game",
+    "platforms": ["PC", "PS4/PS5", "Xbox Series X/S"],
+    "description": "Rivoluziona il genere picchiaduro con un design audio che comunica distanza e tipo di attacco, e schemi di controllo semplificati[cite: 30].",
+    "features": [
+      "Indicatori audio distanza avversario [cite: 77]",
+      "Suoni distinti per colpi alti/medi/bassi [cite: 30]",
+      "Schema controlli 'Moderno' (Combo semplificate) [cite: 77]",
+      "Indicatori visivi sopra la testa (Visual Cues) [cite: 66]"
+    ],
+    "accessibility_details": {
+      "visual": "Un giocatore non vedente può capire esattamente cosa sta facendo l'avversario tramite l'audio design e i suoni di distanza[cite: 66].",
+      "motor": "Lo schema 'Moderno' permette di eseguire mosse speciali con un solo tasto e una direzione[cite: 77].",
+      "auditory": "Visualizzazione dei suoni per indicare colpi e impatti."
+    },
+    "source_ref": "Documento fornito"
+  },
+  {
+    "id": "GAME_007",
+    "name": "Celeste",
+    "access_level": 8.0,
+    "is_native": true,
+    "category": "Platformer",
+    "platforms": ["PC", "Console", "Switch"],
+    "description": "Famoso per la sua 'Assist Mode' che democratizza un gioco noto per la sua estrema difficoltà, permettendo di personalizzare la fisica senza alterare la narrazione[cite: 77].",
+    "features": [
+      "Assist Mode [cite: 77]",
+      "Invincibilità",
+      "Dash infiniti",
+      "Rallentamento velocità gioco"
+    ],
+    "accessibility_details": {
+      "motor": "Permette a chi ha difficoltà motorie o tempi di reazione lenti di superare sezioni platforming precise senza punizioni.",
+      "cognitive": "Riduce la frustrazione e la pressione del fallimento continuo, rendendo la storia accessibile.",
+      "visual": "Design visivo chiaro e pulito (pixel art)."
+    },
+    "source_ref": "Documento fornito"
+  },
+  {
+    "id": "GAME_009",
+    "name": "A Blind Legend",
+    "access_level": 10.0,
+    "is_native": true,
+    "category": "Audio Game",
+    "platforms": ["iOS", "Android", "PC"],
+    "description": "Titolo 'Born Accessible', progettato esclusivamente sull'audio senza necessità di grafica. Il giocatore usa l'ascolto binaurale per localizzare nemici[cite: 42].",
+    "features": [
+      "Audio Binaurale (3D) [cite: 43]",
+      "Interfaccia senza grafica [cite: 41]",
+      "Controlli gesture semplici (Touch)"
+    ],
+    "accessibility_details": {
+      "visual": "Accessibilità assoluta (100%). Non richiede alcuno schermo.",
+      "motor": "Input gestuali semplici (swipe), ma richiede una certa rapidità di reazione.",
+      "auditory": "Ingiocabile per sordi (dipendenza totale dall'audio)."
+    },
+    "source_ref": "Documento fornito"
+  },
+  {
+    "id": "GAME_015",
+    "name": "Elden Ring (Versione Vanilla/Launch)",
+    "access_level": 3.0,
+    "is_native": true,
+    "category": "Action RPG / Soulslike",
+    "platforms": ["PC", "Console"],
+    "description": "Esempio di 'Accessibilità Bassa'. Nonostante l'eccellenza nel design, presenta barriere strutturali severe definite come problematiche nel documento (mancanza di pausa, difficoltà fissa).",
+    "features": [
+      "Mancanza di pulsante di pausa (Impossibilità di fermare l'azione)",
+      "Input timing estremamente precisi richiesti",
+      "Nessun log delle quest o indicatori di direzione chiari (Vanilla)",
+      "Testi piccoli e menu complessi"
+    ],
+    "accessibility_details": {
+      "cognitive": "Carico cognitivo estremo: nessuna mappa guidata, punizione severa alla morte, nessuna pausa per riposare.",
+      "motor": "Richiede riflessi rapidi e combo complesse senza opzioni di rallentamento (contrario a quanto suggerito in Spider-Man 2)[cite: 60].",
+      "visual": "Mancanza di segnali audio per la navigazione o TTS per i menu."
+    },
+    "source_ref": "External Knowledge (Contrasto con le linee guida del documento)"
+  },
+  {
+    "id": "GAME_016",
+    "name": "Beat Saber (Versione Base senza Mod)",
+    "access_level": 2.5,
+    "is_native": true,
+    "category": "VR Rhythm Game",
+    "platforms": ["PC VR", "PlayStation VR", "Quest"],
+    "description": "Titolo VR che richiede movimento fisico completo. Sebbene offra un modo 'No Fail', rappresenta una barriera insormontabile per molte disabilità motorie e visive gravi.",
+    "features": [
+      "Richiesta movimento braccia/corpo intero",
+      "Nessuna alternativa all'input di movimento (Motion Controls obbligatori)",
+      "Dipendenza totale da segnali visivi per il ritmo (nella versione base)"
+    ],
+    "accessibility_details": {
+      "motor": "Ingiocabile per utenti con mobilità ridotta agli arti superiori o che non possono stare in piedi/seduti eretti con ampio raggio di movimento.",
+      "visual": "Nessun supporto per non vedenti; i blocchi devono essere visti per essere colpiti.",
+      "auditory": "Basso supporto nativo per sordi (mancanza di feedback tattile complesso per il ritmo rispetto a visual cues)."
+    },
+    "source_ref": "External Knowledge (Esempio di barriere fisiche citate genericamente nel testo)"
+  }
+]
