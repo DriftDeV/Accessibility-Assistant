@@ -29,7 +29,7 @@ sudo apt install ollama      # Ubuntu
 
 ```bash
 ollama pull nomic-embed-text  # ~274MB
-ollama pull mistral           # ~4.1GB
+ollama pull llama3:8b           # ~4.1GB
 ```
 
 ### 3. Clona il repository
