@@ -260,7 +260,7 @@ python accessibility_rag.py  # Ricrea
 
 ## 🚀 Estensioni Future
 
-- [*] **Web UI** (Gradio/Streamlit)
+- [-] **Web UI** (Gradio/Streamlit)
 - [ ] **Ui Accessibile** Accessibilità su Ui
 - [ ] **Consigli per devs** Consigli per devs su come implementare l'accessibilià nei videogiochi che vorrebbero creare
 - [ ] **Multi-language support** Supporto Multilingua
