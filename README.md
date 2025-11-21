@@ -6,15 +6,6 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Ollama](https://img.shields.io/badge/Ollama-Ready-brightgreen)](https://ollama.ai)
 
-## 🎯 Caratteristiche
-
-- 📚 **RAG semantico**: Ricerca basata su significato, non keywords
-- 🏠 **Completamente locale**: Nessun API esterno, tutto su Ollama
-- ⚡ **Veloce**: <3 secondi per domanda
-- 🧠 **Intelligente**: Limita risposte all'accessibilità
-- 🔧 **Facile da mantenere**: ~480 linee, ben documentato
-- ✅ **Type-safe**: Type hints completi, mypy-ready
-
 ## 📋 Prerequisiti
 
 - **Python** 3.10 o superiore
