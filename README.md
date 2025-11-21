@@ -260,11 +260,10 @@ python accessibility_rag.py  # Ricrea
 
 ## 🚀 Estensioni Future
 
-- [ ] **API REST** (FastAPI)
-- [ ] **Web UI** (Gradio/Streamlit)
-- [ ] **Batch Processing**
-- [ ] **Caching distribuito** (Redis)
-- [ ] **Multi-language support**
+- [*] **Web UI** (Gradio/Streamlit)
+- [ ] **Ui Accessibile** Accessibilità su Ui
+- [ ] **Consigli per devs** Consigli per devs su come implementare l'accessibilià nei videogiochi che vorrebbero creare
+- [ ] **Multi-language support** Supporto Multilingua
 - [ ] **Fine-tuning su dataset custom**
 
 ## 📝 Licenza
