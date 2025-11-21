@@ -346,7 +346,8 @@ python accessibility_rag.py
 - [ ] **Ui Accessibile** Accessibilità su Ui
 - [ ] **Consigli per devs** Consigli per devs su come implementare l'accessibilià nei videogiochi che vorrebbero creare
 - [ ] **Multi-language support** Supporto Multilingua
-- [ ] **Fine-tuning su dataset custom**
+ - [ ] **Fine-tuning su dataset custom**
+ - [ ] 🔄 **Streaming** - Streaming delle risposte del modello (output parziale in tempo reale)
 
 ## 📝 Licenza
 
@@ -354,7 +355,7 @@ MIT
 
 ## 👤 Autore
 
-[Luigi Santini](https://github.com/DriftDeV)
+[Dr1ftDev](https://github.com/DriftDeV) — dr1ftdev@gmail.com
 
 ## 🤝 Contributi
 
