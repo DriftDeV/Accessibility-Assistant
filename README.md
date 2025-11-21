@@ -3,53 +3,17 @@
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue)](https://www.python.org/downloads/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Ollama](https://img.shields.io/badge/Ollama-Ready-brightgreen)](https://ollama.ai)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
----
+## 📋 Prerequisiti
 
-## 📖 Introduzione
+- **Python** 3.10 o superiore
+- **Ollama** con modelli scaricati:
+  - `nomic-embed-text` (embeddings)
+  - `mistral` (generazione)
 
-**Accessibility Assistant** è un sistema di **Retrieval-Augmented Generation (RAG)** progettato per rispondere a domande sull'accessibilità nei videogiochi. 
+## 🚀 Installation
 
-Utilizza:
-- 🤖 **Ollama** per embeddings e generazione di testo (esecuzione 100% locale)
-- 🗂️ **ChromaDB** come vector store per la ricerca semantica
-- 📋 **games.json** come base di conoscenza strutturata
-
-Il sistema è capace di:
-- 🎮 Trovare giochi accessibili per specifiche disabilità (visiva, motoria, uditiva, cognitiva)
-- 📖 Fornire dettagli su feature di accessibilità implementate
-- 💡 Suggerire alternative accessibili
-- 🌐 Rispondere in italiano con fonti documentate
-
-### Esempio di utilizzo
-
-```
- Quali giochi sono accessibili per daltonici?
-
- Risposta:
-Forza Motorsport offre filtri avanzati per daltonismo (Tritanopia, Protanopia, 
-Deuteranopia). The Last of Us Part II include una modalità Alto Contrasto che 
-aiuta a distinguere nemici e alleati...
-
- Fonti:
-  1. **Forza Motorsport**  Racing Simulation  Nativo | Accessibilità: 10/10
-  2. **The Last of Us Part II**  Action-Adventure  Nativo | Accessibilità: 10/10
-```
-
----
-
-## ✅ Pre-requisiti
-
-Prima di installare, assicurati di avere:
-
-| Requisito | Versione | Descrizione |
-|-----------|----------|------------|
-| 🐍 **Python** | 3.11+ | Linguaggio di programmazione |
-| 🤖 **Ollama** | Ultima | Runtime per modelli LLM locali |
-| 🔗 **Git** | Qualsiasi | Per clonare il repository |
-
-### Modelli Ollama richiesti
+### 1. Installa Ollama
 
 ```bash
 ollama pull nomic-embed-text    # ~274MB - Embeddings
@@ -360,55 +324,50 @@ python accessibility_rag.py
 
 ##  Documentazione Aggiuntiva
 
-- 🏗️ **[ARCHITECTURE.md](ARCHITECTURE.md)** - Dettagli tecnici e design del sistema
-- 📖 **[CHANGELOG.md](CHANGELOG.md)** - Cronologia degli aggiornamenti
-- 📋 **[SUMMARY.md](SUMMARY.md)** - Riepilogo delle feature
+- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Dettagli tecnici completi
+- **[Docstrings](./accessibility_rag.py)** - Documentazione inline (Google style)
+
+## 🛠️ Best Practice Implementate
+
+✅ Type hints completi (`PEP 484`)  
+✅ Docstring esaustivi (Google style)  
+✅ Separation of Concerns  
+✅ Logging strutturato  
+✅ Configurazione centralizzata  
+✅ Error handling robusto  
+✅ Test unit comprensivi  
+✅ Nessun magic number  
+✅ Validazione input  
+✅ Nessuna dipendenza pesante  
+
+## 🚀 Estensioni Future
+
+- [ ] **Web UI** (Gradio/Streamlit)
+- [ ] **Ui Accessibile** Accessibilità su Ui
+- [ ] **Consigli per devs** Consigli per devs su come implementare l'accessibilià nei videogiochi che vorrebbero creare
+- [ ] **Multi-language support** Supporto Multilingua
+- [ ] **Fine-tuning su dataset custom**
+
+## 📝 Licenza
+
+MIT
+
+## 👤 Autore
+
+[Luigi Santini](https://github.com/DriftDeV)
+
+## 🤝 Contributi
+
+Contributi sono benvenuti! Per favore:
+
+1. Fork il repository
+2. Crea un branch (`git checkout -b feature/AmazingFeature`)
+3. Commit i cambiamenti (`git commit -m 'Add AmazingFeature'`)
+4. Push al branch (`git push origin feature/AmazingFeature`)
+5. Apri una Pull Request
+
+## ⭐ Se ti piace, metti una stella!
 
 ---
 
-##  Licenza
-
-Questo progetto è rilasciato sotto licenza **MIT**. Vedi [LICENSE](LICENSE) per i dettagli. 📜
-
----
-
-##  Credits
-
-Progetto sviluppato con ❤️ per rendere i videogiochi più accessibili a tutti.
-
-**Tecnologie utilizzate:**
-- 🤖 [Ollama](https://ollama.ai) - LLM locale
-- 🗂️ [ChromaDB](https://www.trychroma.com/) - Vector store
-- 🎨 [Gradio](https://gradio.app/) - Interfaccia web
-- 🐍 [Python 3.11+](https://www.python.org/)
-
----
-
-## 🚧 Roadmap & TODO
-
-Funzionalità pianificate per le prossime versioni:
-
-- [ ] 🌐 **Web UI Avanzata** - Migliore interfaccia Gradio con dark mode e filtri avanzati
-- [ ] ♿ **Accessibilità UI** - WCAG 2.1 AA compliance per l'interfaccia stessa
-- [ ] 💡 **Consigli per Developer** - Suggerimenti su come implementare l'accessibilità nei videogiochi
-- [ ] 🌍 **Multi-Language Support** - Supporto per altre lingue oltre l'italiano
-- [ ] 🎯 **Fine-tuning Custom** - Fine-tuning su dataset specifici dell'utente
-- [ ] 📊 **Analytics Dashboard** - Statistiche sull'utilizzo e query più comuni
-- [ ] 🔗 **API REST** - Esporre il sistema via API per integrazioni terze
-- [ ] 🧪 **Test Expansion** - Aumentare la copertura dei test da X% a 90%+
-- [ ] 📱 **Mobile App** - Applicazione mobile React Native
-- [ ] 🗣️ **Voice Chat** - Supporto per input/output vocale
-
----
-
-## 📞 Supporto & Contatti
-
-Hai domande o dubbi? 🤔
-
-- 💬 Apri una [GitHub Discussion](https://github.com/DriftDeV/Accessibility-Assistant/discussions) per domande generali
-- 🐛 Segnala un bug tramite [GitHub Issues](https://github.com/DriftDeV/Accessibility-Assistant/issues) per problemi
-- 📧 Contatta il team di sviluppo per collaborazioni
-
----
-
-**Ultimo aggiornamento:** Novembre 2025 ✨
+**Made with ❤️ per l'accessibilità nei videogiochi**
