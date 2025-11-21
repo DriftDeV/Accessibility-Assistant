@@ -51,7 +51,7 @@ class RAGConfig:
     
     # Modelli Ollama
     ollama_embedding_model: str = "nomic-embed-text"
-    ollama_llm_model: str = "mistral"
+    ollama_llm_model: str = "llama3:8b"
     ollama_base_url: str = "http://localhost:11434"
     
     # Parametri di ricerca e generazione
@@ -87,8 +87,6 @@ def setup_logging(level: int = logging.INFO) -> logging.Logger:
 # ==============================================================================
 # DATA LOADING
 # ==============================================================================
-
-
 class GameDataLoader:
     """Carica e valida i dati dei giochi dal file JSON.
     
@@ -145,7 +143,6 @@ class GameDataLoader:
 # ==============================================================================
 # PREPROCESSING DOCUMENTI
 # ==============================================================================
-
 
 class DocumentPreprocessor:
     """Prepara i documenti per l'indicizzazione in ChromaDB."""
@@ -253,7 +250,6 @@ class DocumentPreprocessor:
 # ==============================================================================
 # VECTOR STORE
 # ==============================================================================
-
 
 class VectorStore:
     """Gestisce ChromaDB per l'indicizzazione e la ricerca semantica.
@@ -375,7 +371,6 @@ class VectorStore:
 # GENERAZIONE RISPOSTE
 # ==============================================================================
 
-
 class ResponseGenerator:
     """Genera risposte utilizzando Ollama.
     
@@ -458,7 +453,6 @@ RISPOSTA:"""
 # ==============================================================================
 # ASSISTENTE PRINCIPALE
 # ==============================================================================
-
 
 class AccessibilityAssistant:
     """Assistente RAG per domande sull'accessibilità nei videogiochi.
