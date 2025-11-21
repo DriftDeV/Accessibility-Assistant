@@ -283,5 +283,3 @@ Contributi sono benvenuti! Per favore:
 ## ⭐ Se ti piace, metti una stella!
 
 ---
-
-**Made with ❤️ per l'accessibilità nei videogiochi**
