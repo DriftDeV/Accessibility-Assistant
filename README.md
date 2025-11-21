@@ -11,7 +11,7 @@
 - **Python** 3.10 o superiore
 - **Ollama** con modelli scaricati:
   - `nomic-embed-text` (embeddings)
-  - `mistral` (generazione)
+  - `llama3:8b` (generazione)
 
 ## 🚀 Installation
 
