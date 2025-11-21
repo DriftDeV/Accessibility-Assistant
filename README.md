@@ -266,13 +266,9 @@ python accessibility_rag.py  # Ricrea
 - [ ] **Multi-language support** Supporto Multilingua
 - [ ] **Fine-tuning su dataset custom**
 
-## 📝 Licenza
-
-MIT
-
 ## 👤 Autore
 
-[Luigi Santini](https://github.com/DriftDeV)
+[Dr1ftDev]
 
 ## 🤝 Contributi
 
