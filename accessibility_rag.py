@@ -15,15 +15,19 @@ Esempio di utilizzo:
 
 import json
 import logging
+import os
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
 
 import chromadb
 from chromadb.config import Settings
+from dotenv import load_dotenv
+
+# Carica variabili da .env se esiste
+load_dotenv(".env", override=False)
 
 logger = logging.getLogger(__name__)
-
 
 # ==============================================================================
 # CONFIGURAZIONE
@@ -43,6 +47,7 @@ class RAGConfig:
         ollama_base_url: URL base di Ollama
         top_k_results: Numero di risultati di ricerca da recuperare
         max_tokens: Token massimi per le risposte generate
+        log_level: Livello di logging
     """
 
     games_file: Path = Path("games.json")
@@ -55,11 +60,47 @@ class RAGConfig:
     ollama_base_url: str = "http://localhost:11434"
     
     # Parametri di ricerca e generazione
-    top_k_results: int = 3
-    max_tokens: int = 300
+    top_k_results: int = 10
+    max_tokens: int = 512
     
     # Logging
     log_level: int = logging.INFO
+    
+    @classmethod
+    def from_env(cls) -> "RAGConfig":
+        """Crea RAGConfig dalle variabili d'ambiente.
+        
+        Legge i valori da .env e variabili d'ambiente con fallback ai default.
+        
+        Returns:
+            Istanza di RAGConfig configurata da ambiente
+        """
+        def get_env(key: str, default: str = "") -> str:
+            """Legge una variabile d'ambiente con fallback."""
+            return os.getenv(key, default)
+        
+        def get_int_env(key: str, default: int = 0) -> int:
+            """Legge una variabile d'ambiente come intero."""
+            try:
+                return int(get_env(key, str(default)))
+            except ValueError:
+                return default
+        
+        # Leggi log level
+        log_level_str = get_env("LOG_LEVEL", "INFO").upper()
+        log_level = getattr(logging, log_level_str, logging.INFO)
+        
+        return cls(
+            games_file=Path(get_env("GAMES_FILE", "games.json")),
+            chroma_dir=Path(get_env("CHROMA_DB_DIR", "./chroma_db")),
+            chroma_collection=get_env("CHROMA_COLLECTION", "games_accessibility"),
+            ollama_base_url=get_env("OLLAMA_BASE_URL", "http://localhost:11434"),
+            ollama_embedding_model=get_env("OLLAMA_EMBEDDING_MODEL", "nomic-embed-text"),
+            ollama_llm_model=get_env("OLLAMA_LLM_MODEL", "llama3:8b"),
+            top_k_results=get_int_env("TOP_K_RESULTS", 3),
+            max_tokens=get_int_env("MAX_TOKENS", 300),
+            log_level=log_level,
+        )
 
 
 # ==============================================================================

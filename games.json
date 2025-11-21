@@ -209,5 +209,225 @@
       "auditory": "Basso supporto nativo per sordi (mancanza di feedback tattile complesso per il ritmo rispetto a visual cues)."
     },
     "source_ref": "External Knowledge (Esempio di barriere fisiche citate genericamente nel testo)"
+  },    
+  {
+    "id": "GAME_017",
+    "name": "Minecraft (Java Edition)",
+    "access_level": 4.0,
+    "is_native": true,
+    "category": "Survival / Sandbox",
+    "platforms": ["PC (Windows, Mac, Linux)"],
+    "description": "A differenza della Bedrock, la Java Edition è nativamente poco accessibile (manca il supporto controller nativo). Tuttavia, diventa un 10/10 grazie alla community di modding, permettendo a giocatori non vedenti di giocare completamente tramite mod come 'Accessiplay' o 'Minecraft Access'.",
+    "features": [
+      "Supporto Modding Illimitato (Accessibilità tramite community)",
+      "Chat solo testuale (Nativamente limitata)",
+      "Sottotitoli avanzati (Native)",
+      "Nessun supporto controller nativo (Richiede mapping esterno)"
+    ],
+    "accessibility_details": {
+      "motor": "Critico nativamente: richiede mouse e tastiera. Necessita di mod per l'uso di controller o input adattivi.",
+      "visual": "Nativamente basso. Con mod specifiche (es. output audio dei blocchi), diventa uno dei giochi più giocati dai non vedenti.",
+      "auditory": "Buono: i sottotitoli indicano la direzione dei suoni (es. 'Passi a destra')."
+    },
+    "source_ref": "External Knowledge [Web Search]"
+  },
+  {
+    "id": "GAME_018",
+    "name": "Forza Horizon 5",
+    "access_level": 9.0,
+    "is_native": true,
+    "category": "Open World Racing",
+    "platforms": ["PC", "Xbox Series X/S", "Xbox One"],
+    "description": "Premiato per l'inclusione della Lingua dei Segni (ASL/BSL) nelle cinematiche. Introduce la possibilità di ridurre la velocità del gioco offline per aumentare i tempi di reazione.",
+    "features": [
+      "Interprete Lingua dei Segni (ASL/BSL) in Picture-in-Picture",
+      "Game Speed Modification (Rallentamento offline)",
+      "Modalità Daltonismo (Tritanopia, Protanopia, Deuteranopia)",
+      "Screen Reader Narrator"
+    ],
+    "accessibility_details": {
+      "auditory": "Eccezionale: supporto completo per sordi con interpreti visivi durante le cutscene, non solo sottotitoli.",
+      "cognitive": "La riduzione della velocità di gioco permette di elaborare le curve e gli ostacoli con meno pressione.",
+      "visual": "Interfaccia scalabile e opzioni di alto contrasto per i menu."
+    },
+    "source_ref": "External Knowledge [Web Search]"
+  },
+  {
+    "id": "GAME_019",
+    "name": "Hearthstone",
+    "access_level": 5.0,
+    "is_native": true,
+    "category": "Card Game (CCG)",
+    "platforms": ["PC", "Mobile"],
+    "description": "Nativamente accessibile per disabilità motorie (basso APM richiesto), ma per i non vedenti dipende quasi interamente da mod esterne come 'Hearthstone Access' per leggere le carte e il board.",
+    "features": [
+      "Controlli 'One-Click' (Mouse o Touch)",
+      "Nessuna richiesta di riflessi rapidi (tranne in modalità Battlegrounds)",
+      "Compatibilità con mod Screen Reader (Hearthstone Access)"
+    ],
+    "accessibility_details": {
+      "visual": "Nativamente ingiocabile per non vedenti. Con la mod 'Hearthstone Access', diventa completamente fruibile tramite audio cues.",
+      "motor": "Eccellente: si può giocare con un solo dito, eye-tracker o input vocali semplici.",
+      "cognitive": "Richiede lettura e calcolo, ma i turni non hanno limiti strettissimi nelle modalità solo."
+    },
+    "source_ref": "External Knowledge [Web Search]"
+  },
+  {
+    "id": "GAME_020",
+    "name": "Halo: Combat Evolved (MCC)",
+    "access_level": 7.0,
+    "is_native": true,
+    "category": "FPS",
+    "platforms": ["PC", "Xbox"],
+    "description": "Parte della Master Chief Collection (MCC). Beneficia delle opzioni moderne del launcher MCC (sottotitoli personalizzabili, rimappatura), ma il design dei livelli del 2001 rimane labirintico per chi ha difficoltà cognitive.",
+    "features": [
+      "Supporto Moderno MCC (Menu unificato)",
+      "Rimappatura completa controlli",
+      "Toggle Grafica (Passaggio istantaneo grafica vecchia/nuova)"
+    ],
+    "accessibility_details": {
+      "cognitive": "Mappe complesse e ripetitive (es. 'The Library') possono disorientare senza indicatori di navigazione moderni.",
+      "visual": "La grafica 'Anniversary' aggiunge dettagli che possono ridurre la leggibilità; la modalità classica è spesso più chiara."
+    },
+    "source_ref": "External Knowledge [Web Search]"
+  },
+  {
+    "id": "GAME_021",
+    "name": "Halo 2 (MCC)",
+    "access_level": 7.5,
+    "is_native": true,
+    "category": "FPS",
+    "platforms": ["PC", "Xbox"],
+    "description": "Come Halo CE, beneficia della suite MCC. Introduce sottotitoli migliori nelle cutscene rispetto all'originale. La difficoltà è nota per essere punitiva ai livelli alti, ma modificabile tramite i 'Teschi' (Skulls).",
+    "features": [
+      "Teschi di modifica gameplay (es. munizioni infinite)",
+      "Chat text-to-speech",
+      "Navigazione menu assistita"
+    ],
+    "accessibility_details": {
+      "motor": "Il 'dual wielding' (doppia arma) richiede la gestione di due grilletti contemporaneamente, rimappabile ma complesso.",
+      "auditory": "Sottotitoli migliorati nella versione Anniversary."
+    },
+    "source_ref": "External Knowledge [Web Search]"
+  },
+  {
+    "id": "GAME_022",
+    "name": "Halo 3 (MCC)",
+    "access_level": 7.5,
+    "is_native": true,
+    "category": "FPS",
+    "platforms": ["PC", "Xbox"],
+    "description": "Il ritmo di gioco è più lento ('floaty') rispetto ad altri shooter, favorendo chi ha tempi di reazione moderati. Include tutte le opzioni di accessibilità della MCC aggiornate al 2024.",
+    "features": [
+      "Crosshair personalizzabile (Posizione e colore)",
+      "Opzioni colore squadra/nemici",
+      "Controlli veicoli assistiti"
+    ],
+    "accessibility_details": {
+      "visual": "I nemici sono ben distinti dagli scenari rispetto ai capitoli precedenti.",
+      "motor": "Ritmo di combattimento meno frenetico rispetto a Halo 2 o Infinite."
+    },
+    "source_ref": "External Knowledge [Web Search]"
+  },
+  {
+    "id": "GAME_023",
+    "name": "Halo 4 (MCC)",
+    "access_level": 8.0,
+    "is_native": true,
+    "category": "FPS",
+    "platforms": ["PC", "Xbox"],
+    "description": "Introduce nativamente indicatori visivi più chiari per obiettivi e armi. Essendo un titolo più moderno nella collection, l'UI è più leggibile.",
+    "features": [
+      "Waypoint obiettivi chiari",
+      "QTE semplificati",
+      "Assistenza alla mira magnetica (regolabile)"
+    ],
+    "accessibility_details": {
+      "cognitive": "Molto guidato, riduce il rischio di perdersi nelle mappe.",
+      "visual": "HUD molto dettagliato, talvolta troppo denso di informazioni."
+    },
+    "source_ref": "External Knowledge [Web Search]"
+  },
+  {
+    "id": "GAME_024",
+    "name": "Halo Infinite",
+    "access_level": 8.5,
+    "is_native": true,
+    "category": "FPS",
+    "platforms": ["PC", "Xbox Series X/S"],
+    "description": "Un salto quantico per la serie. Introduce la 'Linear Navigation' per muoversi nei menu senza vista e opzioni sensoriali complete.",
+    "features": [
+      "Linear Navigation Mode (UI accessibile ai non vedenti)",
+      "Outline Nemici/Amici personalizzabile (Colore e spessore)",
+      "Sensory Cues (Audio personalizzato per passi/spari)",
+      "Text-to-Speech e Speech-to-Text nativi"
+    ],
+    "accessibility_details": {
+      "visual": "I contorni (Outlines) colorati aggirano il problema della mimetizzazione, rendendo i nemici immediatamente visibili.",
+      "motor": "Piena rimappatura e supporto per l'Xbox Adaptive Controller.",
+      "cognitive": "Menu navigabili linearmente riducono il carico mnemonico spaziale."
+    },
+    "source_ref": "External Knowledge [Web Search]"
+  },
+  {
+    "id": "GAME_025",
+    "name": "God of War Ragnarök",
+    "access_level": 9.5,
+    "is_native": true,
+    "category": "Action-Adventure",
+    "platforms": ["PS4", "PS5", "PC"],
+    "description": "Uno dei picchi massimi dell'accessibilità industriale. Oltre 70 opzioni, inclusa l'automazione completa delle fasi platform e preset rapidi.",
+    "features": [
+      "Traversal Assist (Salto/arrampicata automatica)",
+      "Turn Navigation (La camera si gira verso l'obiettivo)",
+      "High Contrast Mode (Personalizzabile per elementi)",
+      "Audio Cues per ogni interazione"
+    ],
+    "accessibility_details": {
+      "motor": "Rimuove la necessità di input complessi per l'esplorazione; il combattimento può essere rallentato o automatizzato parzialmente.",
+      "visual": "Modalità alto contrasto e segnali audio permettono il gioco a persone con residuo visivo minimo.",
+      "cognitive": "Puzzle assistiti e navigazione guidata."
+    },
+    "source_ref": "External Knowledge [Web Search]"
+  },
+  {
+    "id": "GAME_026",
+    "name": "Prince of Persia: The Lost Crown",
+    "access_level": 9.0,
+    "is_native": true,
+    "category": "Metroidvania",
+    "platforms": ["PC", "Console", "Switch"],
+    "description": "Risolve il problema della memoria nei Metroidvania con i 'Frammenti di Memoria' (screenshot della mappa). Offre opzioni per saltare sezioni platform difficili.",
+    "features": [
+      "Memory Shards (Screenshot pinzabili sulla mappa)",
+      "Platforming Assist (Portali per saltare sezioni ardue)",
+      "High Contrast Mode",
+      "Parry Visual Indicators"
+    ],
+    "accessibility_details": {
+      "cognitive": "I 'Memory Shards' rimuovono il carico di dover ricordare dove si trovano le porte bloccate, salvando uno screenshot direttamente sulla mappa.",
+      "motor": "Permette di bypassare intere sezioni di salto che richiederebbero precisione millimetrica."
+    },
+    "source_ref": "External Knowledge [Web Search]"
+  },
+  {
+    "id": "GAME_027",
+    "name": "Gears 5",
+    "access_level": 9.0,
+    "is_native": true,
+    "category": "Third-Person Shooter",
+    "platforms": ["PC", "Xbox"],
+    "description": "Pioniere per l'Xbox Adaptive Controller. Famoso per la modalità 'Fabrizio' (Target Lock) che permette di giocare con un solo stick.",
+    "features": [
+      "Target Lock (Mira assistita totale)",
+      "Single Stick Gameplay",
+      "Sottotitoli con indicazione del parlante e contesto",
+      "Rimappatura completa"
+    ],
+    "accessibility_details": {
+      "motor": "Progettato specificamente per essere completato usando solo l'Adaptive Controller o input limitati.",
+      "auditory": "Sottotitoli eccellenti e 'Ping' visivo dei nemici."
+    },
+    "source_ref": "External Knowledge [Web Search]"
   }
 ]

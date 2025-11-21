@@ -40,7 +40,6 @@ from typing import Any, Dict, List, Optional, Tuple
 import gradio as gr
 
 from accessibility_rag import AccessibilityAssistant, RAGConfig, setup_logging
-from config import AppConfig
 
 # Logger configurato
 LOGGER = logging.getLogger(__name__)
@@ -51,7 +50,7 @@ READY_EVENT: Optional[threading.Event] = None
 
 
 def initialize_assistant_in_thread(
-	cfg: AppConfig,
+	cfg: RAGConfig,
 ) -> Tuple[AccessibilityAssistant, threading.Event]:
 	"""Inizializza l'assistente in un thread separato.
 
@@ -60,21 +59,12 @@ def initialize_assistant_in_thread(
 	dove ready_event viene settato quando l'inizializzazione è completata.
 
 	Args:
-		cfg: AppConfig con la configurazione
+		cfg: RAGConfig con la configurazione
 
 	Returns:
 		Tupla di (assistant_instance, ready_threading_event)
 	"""
-	rag_config = RAGConfig(
-		games_file=cfg.games_file,
-		chroma_dir=cfg.chroma_db_dir,
-		ollama_embedding_model=cfg.ollama_embedding_model,
-		ollama_llm_model=cfg.ollama_llm_model,
-		ollama_base_url=cfg.ollama_base_url,
-		top_k_results=cfg.top_k_results,
-		max_tokens=cfg.max_tokens,
-		log_level=cfg.log_level,
-	)
+	rag_config = cfg
 
 	assistant = AccessibilityAssistant(rag_config)
 	ready = threading.Event()
@@ -134,8 +124,8 @@ def format_sources(sources: List[Dict[str, Any]]) -> str:
 
 
 def respond(
-	message: str, chat_history: Optional[List[Tuple[str, str]]]
-) -> Tuple[List[Tuple[str, str]], str]:
+	message: str, chat_history: Optional[List[Dict[str, str]]]
+) -> Tuple[List[Dict[str, str]], str]:
 	"""Gestore della risposta per il messaggio dell'utente.
 
 	Processa il messaggio attraverso il RAG assistant e aggiorna la
@@ -143,7 +133,7 @@ def respond(
 
 	Args:
 		message: Messaggio dell'utente
-		chat_history: Cronologia della chat (lista di tuple user/assistant)
+		chat_history: Cronologia della chat (lista di dicts con role/content)
 
 	Returns:
 		Tupla di (chat_history_aggiornato, campo_di_input_vuoto)
@@ -159,21 +149,25 @@ def respond(
 	if not message or not message.strip():
 		return chat_history, ""
 
+	# Aggiungi il messaggio dell'utente
+	chat_history.append({"role": "user", "content": message})
+
 	# Verifica stato di inizializzazione
 	if ready_event is None or not ready_event.is_set():
-		chat_history.append(("Tu", message))
 		chat_history.append(
-			(
-				"Assistente",
-				"⏳ Sistema in inizializzazione... Sto caricando i dati. Riprova tra qualche istante.",
-			)
+			{
+				"role": "assistant",
+				"content": "⏳ Sistema in inizializzazione... Sto caricando i dati. Riprova tra qualche istante.",
+			}
 		)
 		return chat_history, ""
 
 	if assistant is None:
-		chat_history.append(("Tu", message))
 		chat_history.append(
-			("Assistente", "❌ Errore: Assistente non inizializzato correttamente.")
+			{
+				"role": "assistant",
+				"content": "❌ Errore: Assistente non inizializzato correttamente.",
+			}
 		)
 		return chat_history, ""
 
@@ -187,20 +181,18 @@ def respond(
 		# Formatta risposta con fonti
 		full_answer = answer + format_sources(sources)
 
-		chat_history.append(("Tu", message))
-		chat_history.append(("Assistente", full_answer))
+		chat_history.append({"role": "assistant", "content": full_answer})
 
 		LOGGER.debug("Query elaborata con successo")
 		return chat_history, ""
 
 	except Exception as exc:
 		LOGGER.exception("Errore durante l'elaborazione: %s", exc)
-		chat_history.append(("Tu", message))
 		chat_history.append(
-			(
-				"Assistente",
-				f"❌ Errore: Si è verificato un problema. {str(exc)[:100]}",
-			)
+			{
+				"role": "assistant",
+				"content": f"❌ Errore: Si è verificato un problema. {str(exc)[:100]}",
+			}
 		)
 		return chat_history, ""
 
@@ -243,6 +235,7 @@ def build_ui() -> gr.Blocks:
 			label="💬 Conversazione",
 			height=400,
 			show_copy_button=True,
+			type="messages"
 		)
 
 		# Input section
@@ -314,8 +307,8 @@ def main() -> None:
 	Carica la configurazione, inizializza l'assistente in background,
 	e avvia il server Gradio.
 	"""
-	# Carica configurazione
-	cfg = AppConfig()
+	# Carica configurazione da variabili d'ambiente
+	cfg = RAGConfig.from_env()
 	logger = setup_logging(cfg.log_level)
 	LOGGER.setLevel(cfg.log_level)
 
